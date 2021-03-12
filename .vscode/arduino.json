@@ -1,0 +1,5 @@
+{
+    "board": "arduino:sam:arduino_due_x",
+    "sketch": "flow_led.ino",
+    "port": "COM6"
+}
