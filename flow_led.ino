@@ -51,29 +51,7 @@ int bound(int x){
     return x;
 }
 void led_off(uint8_t no){
-    switch (no)
-    {
-    case 1:
-        analogWrite(LED1_PIN , 0);
-        break;
-    case 2:
-        analogWrite(LED2_PIN , 0);
-        break;
-    case 3:
-        analogWrite(LED3_PIN , 0);
-        break;
-    case 4:
-        analogWrite(LED4_PIN , 0);
-        break;
-    case 5:
-        analogWrite(LED5_PIN , 0);
-        break;
-    case 6:
-        analogWrite(LED6_PIN , 0);
-        break;
-    default:
-        break;
-    }
+    led_on(no ,0);
 }
 void led_on(uint8_t no,int16_t intensity){
     
