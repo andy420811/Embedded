@@ -4,16 +4,22 @@
 #define LED4_PIN 9
 #define LED5_PIN 10
 #define LED6_PIN 11
+#define BTN_PIN 2
 
 #define MAX_INTENSITY 255
 #define FADE_AMONT 61
 #define DELAYTIME 100
 
+#define LEFT true
+#define RIGHT false 
+
 bool direc = true;
 int8_t cur_led = 1;
+bool pause = false;
 
 void setup()
 {
+    pinMode(BTN_PIN, INPUT);
     pinMode(LED1_PIN, OUTPUT);
     pinMode(LED2_PIN, OUTPUT);
     pinMode(LED3_PIN, OUTPUT);
@@ -24,14 +30,17 @@ void setup()
 }
 void loop()
 {
-    direc ? cur_led++ : cur_led-- ;
-    update();
-    direc = cur_led == 8 || cur_led == -1 ? !direc : direc;
+    pause = digitalRead(BTN_PIN) ? !pause : pause;
+    if(!pause){
+        direc ? cur_led++ : cur_led-- ;
+        update();
+        direc = cur_led == 8 || cur_led == -1 ? !direc : direc;
+    }
     delay(DELAYTIME);
   //  Serial.println(cur_led);
 }
 void update(){
-    if (direc == true)
+    if (direc == LEFT)
     {
         for (int8_t i = 1; i < 7; i++)
         {
