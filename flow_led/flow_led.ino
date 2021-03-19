@@ -1,10 +1,18 @@
+#define BTN_PIN 2
+/*
 #define LED1_PIN 3
 #define LED2_PIN 5
 #define LED3_PIN 6
 #define LED4_PIN 9
 #define LED5_PIN 10
 #define LED6_PIN 11
-#define BTN_PIN 2
+*/
+#define LED1_PIN 2
+#define LED2_PIN 3
+#define LED3_PIN 4
+#define LED4_PIN 5
+#define LED5_PIN 6
+#define LED6_PIN 7
 
 #define MAX_INTENSITY 255
 #define FADE_AMONT 61

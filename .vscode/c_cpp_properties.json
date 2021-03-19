@@ -12,7 +12,7 @@
                 "C:\\Users\\user\\AppData\\Local\\Arduino15\\packages\\arduino\\hardware\\sam\\1.6.12\\**"
             ],
             "forcedInclude": [
-                "C:\\Users\\HP\\AppData\\Local\\Arduino15\\packages\\arduino\\hardware\\sam\\1.6.12\\cores\\arduino\\Arduino.h"
+                "C:\\Users\\user\\AppData\\Local\\Arduino15\\packages\\arduino\\hardware\\sam\\1.6.12\\cores\\arduino\\Arduino.h"
             ],
             "defines": [
                 "USBCON"

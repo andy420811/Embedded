@@ -1,5 +1,5 @@
 {
     "board": "arduino:sam:arduino_due_x_dbg",
-    "sketch": "flow_led.ino",
+    "sketch": "adder\\adder.ino",
     "port": "COM6"
 }
