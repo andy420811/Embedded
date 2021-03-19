@@ -61,7 +61,8 @@ void Multiplier(){
   c[1] = ((a[1]&b[2])&(a[2]&b[1]))&(a[1]&b[1]);
 }
 /**
- * the 3 bit adder without using if else statement.
+ * the 3 bit signed adder without using if else statement.
+ * ## By using multiplexer, full adder and full substractor.
  * 1. rearrange the two number by a is larger number.
  * 2. check a , b is negative or not.
  * 3. if one of a or b is negative use full substractor else use the full adder to get 3bits value.
