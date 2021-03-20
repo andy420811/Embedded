@@ -15,7 +15,7 @@
 #define LED6_PIN 7
 
 #define MAX_INTENSITY 255
-#define FADE_AMONT 61
+#define FADE_AMONT 64
 #define DELAYTIME 100
 
 #define LEFT true
@@ -34,11 +34,18 @@ void setup()
     pinMode(LED4_PIN, OUTPUT);
     pinMode(LED5_PIN, OUTPUT);
     pinMode(LED6_PIN, OUTPUT);
-   // Serial.begin(9600);
+    Serial.begin(9600);
 }
 void loop()
 {
+    
     pause = digitalRead(BTN_PIN) ? !pause : pause;
+    if (Serial.available())
+    {
+        pause = !(Serial.read() & '0') | 0;
+    }
+    
+    
     if(!pause){
         direc ? cur_led++ : cur_led-- ;
         update();
