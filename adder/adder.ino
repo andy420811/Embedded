@@ -53,12 +53,26 @@ void loop()
     delay(1000);
     //Serial.println("C: " + String(c[4]) + String(c[3]) + String(c[2]) + String(c[1]) + String(c[0]));
 }
-void Multiplier(){
-  c[0] = a[0]^b[0];
-  c[4] = a[2]^b[2];
-  c[3] = (a[1]&b[2])^(a[2]&b[1]);
-  c[2] = ((a[1]&b[2])&(a[2]&b[1]))^(a[1]&b[1]);
-  c[1] = ((a[1]&b[2])&(a[2]&b[1]))&(a[1]&b[1]);
+void truthtable(int i,int j){
+    if (i < 3 && j < 3){
+        a[i] = 0;
+        b[i] = 0;
+        truthtable(i + 1,j + 1);
+        a[i] = 1;
+        b[i] = 0;
+        truthtable(i + 1,j + 1);
+        a[i] = 0;
+        b[i] = 1;
+        truthtable(i + 1,j + 1);
+        b[i] = 1;
+        a[i] = 1;
+        truthtable(i + 1,j + 1);
+    }else{
+        //test funtion here
+        Serial.print("A: " + String(a[2]) + String(a[1]) + String(a[0]));
+        Serial.print(" B: " + String(b[2]) + String(b[1]) + String(b[0]));
+        Serial.println(" C: " + String(c[4]) + String(c[3]) + String(c[2]) + String(c[1]) + String(c[0]));
+    }
 }
 /**
  * the 3 bit signed adder without using if else statement.
