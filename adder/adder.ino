@@ -22,6 +22,10 @@
 
 bool a[3];
 bool b[3];
+
+bool ain[3];
+bool bin[3];
+
 bool c[5];
 bool selectA;
 
@@ -42,6 +46,7 @@ void setup()
     memset(a , 0 , sizeof(a));
     memset(b , 0 , sizeof(b));
     memset(c , 0 , sizeof(c));
+    //truthtable(0,0);
 
 }
 
@@ -51,26 +56,28 @@ void loop()
     bit3_adder();
     update();
     delay(1000);
-    //Serial.println("C: " + String(c[4]) + String(c[3]) + String(c[2]) + String(c[1]) + String(c[0]));
 }
 void truthtable(int i,int j){
     if (i < 3 && j < 3){
-        a[i] = 0;
-        b[i] = 0;
+        ain[i] = 0;
+        bin[i] = 0;
         truthtable(i + 1,j + 1);
-        a[i] = 1;
-        b[i] = 0;
+        ain[i] = 1;
+        bin[i] = 0;
         truthtable(i + 1,j + 1);
-        a[i] = 0;
-        b[i] = 1;
+        ain[i] = 0;
+        bin[i] = 1;
         truthtable(i + 1,j + 1);
-        b[i] = 1;
-        a[i] = 1;
+        bin[i] = 1;
+        ain[i] = 1;
         truthtable(i + 1,j + 1);
     }else{
-        //test funtion here
-        Serial.print("A: " + String(a[2]) + String(a[1]) + String(a[0]));
-        Serial.print(" B: " + String(b[2]) + String(b[1]) + String(b[0]));
+        a[0] = ain[0];a[1] = ain[1];a[2] = ain[2];
+        b[0] = bin[0];b[1] = bin[1];b[2] = bin[2];
+        bit3_adder();
+
+        Serial.print("A: " + String(ain[2]) + String(ain[1]) + String(ain[0]));
+        Serial.print(" B: " + String(bin[2]) + String(bin[1]) + String(bin[0]));
         Serial.println(" C: " + String(c[4]) + String(c[3]) + String(c[2]) + String(c[1]) + String(c[0]));
     }
 }
@@ -87,15 +94,15 @@ void bit3_adder(){
     bool negative_a = a[2] & 0b001;
     bool negative_b = b[2] & 0b001;
     /*
-    Serial.println("selectA A :" + String(selectA) + " selectA B :" + String(!selectA));
-    Serial.println("A: " + String(a[2]) + String(a[1]) + String(a[0]));
-    Serial.println("B: " + String(b[2]) + String(b[1]) + String(b[0]));
+    Serial.print("selectA A :" + String(selectA) + " selectA B :" + String(!selectA));
+    Serial.print(" A: " + String(a[2]) + String(a[1]) + String(a[0]));
+    Serial.println(" B: " + String(b[2]) + String(b[1]) + String(b[0]));
     */
     int tmp;
     tmp = (substractor(&c[0] , a[0] , b[0] , 0) & (negative_a ^ negative_b)) | (adder(&c[0] , a[0] , b[0] , 0) & !(negative_a ^ negative_b));
     c[2] = (substractor(&c[1] , a[1] , b[1] , tmp) & (negative_a ^ negative_b)) | (adder(&c[1] , a[1] , b[1] , tmp) & !(negative_a ^ negative_b));
 
-    c[3] = (selectA & negative_a) | (negative_a & negative_b);
+    c[3] = (negative_a) | (negative_a & negative_b);
 }
 /**
  * The function to make sure the magnitude a is larger than b.
@@ -106,7 +113,8 @@ void BigToA(){
     bool tmp[3] = {0,0,0};
     bool bit2 = (a[1] & !b[1]);                     //a,b's 2nd bit is 1 and 0 then a > b
     bool bit1 = (!(a[1] ^ b[1]) & (a[0] & !b[0]));  //a,b's 2nd bit is same ,and a,b's 1st bit is 1 and 0 then a > b
-
+    selectA = bit2 | bit1;
+    
     tmp[2] = (a[2]  & selectA | b[2]  & !selectA);
     tmp[1] = (a[1]  & selectA | b[1]  & !selectA);
     tmp[0] = (a[0]  & selectA | b[0]  & !selectA);
